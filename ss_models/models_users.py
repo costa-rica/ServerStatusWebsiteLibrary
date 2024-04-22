@@ -20,6 +20,7 @@ class Users(Base, UserMixin):
     __tablename__ = 'users'
     id = Column(Integer, primary_key = True)
     email = Column(Text, unique = True, nullable = False)
+    username = Column(Text, default=default_username)
     password = Column(Text, nullable = False)
     permission = Column(Text)
     posts = relationship('BlogPosts', backref='author', lazy=True)
