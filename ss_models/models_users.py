@@ -16,7 +16,7 @@ def default_username(context):
 
 
 
-class Users(Base_users, UserMixin):
+class Users(Base, UserMixin):
     __tablename__ = 'users'
     id = Column(Integer, primary_key = True)
     email = Column(Text, unique = True, nullable = False)
@@ -51,7 +51,7 @@ class Users(Base_users, UserMixin):
         return f'Users(id: {self.id}, email: {self.email}, permission: {self.permission})'
 
 
-class BlogPosts(Base_users):
+class BlogPosts(Base):
     __tablename__ = 'blog_posts'
     id = Column(Integer, primary_key = True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
@@ -68,9 +68,3 @@ class BlogPosts(Base_users):
 
     def __repr__(self):
         return f'BlogPosts(id: {self.id}, user_id: {self.user_id}, title: {self.title})'
-# if 'users' in inspect(engine).get_table_names():
-#     print("db already exists")
-# else:
-
-#     Base.metadata.create_all(engine)
-#     print("NEW db created.")

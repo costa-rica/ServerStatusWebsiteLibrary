@@ -28,7 +28,6 @@ secure==0.3.0
 six==1.16.0
 soupsieve==2.4.1
 SQLAlchemy==2.0.19
--e git+https://github.com/costa-rica/ServerStatusWebsite_modules.git@960302e406128b50ef54aa6c644f02814eabe0f0#egg=ss_modules&subdirectory=ss_modules
 systemd==0.17.1
 typing_extensions==4.7.1
 tzdata==2023.3

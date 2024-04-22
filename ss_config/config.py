@@ -4,15 +4,14 @@ from dotenv import load_dotenv, find_dotenv
 
 load_dotenv()
 print(f"- .env: {find_dotenv()}")
-print("- reading dd07modules/fsw_config/config.py")
-print(f"- FSW_CONFIG_TYPE: {os.environ.get('FSW_CONFIG_TYPE')}")
+print(f"- FLASK_CONFIG_TYPE: {os.environ.get('FLASK_CONFIG_TYPE')}")
 print(f"- FLASK_DEBUG: {os.environ.get('FLASK_DEBUG')}")
 
 
 with open(os.path.join(os.environ.get('CONFIG_ROOT'), os.environ.get('CONFIG_FILE_NAME'))) as config_json_file:
     # config_json_dict = json.load(env_file)
     config_json_dict = json.load(config_json_file)
-        # os.environ["PROJECT_ROOT"] = "/Users/nick/Documents/exFlaskBlueprintFrameworkStarterWithLogin/"
+        # os.environ["WEB_ROOT"] = "/Users/nick/Documents/exFlaskBlueprintFrameworkStarterWithLogin/"
 
 
 class ConfigBasic():
@@ -47,18 +46,20 @@ class ConfigBasic():
         self.BLS_API_URL = config_json_dict.get('BLS_API_URL')
 
         # # FROM OLD ConfigWorkstation
-        # self.DB_ROOT = self.DB_LOCAL_ROOT
+        # self.DATABASE_ROOT = self.DB_LOCAL_ROOT
         # self.SQL_URI_USERS = f"sqlite:///{self.DB_LOCAL_ROOT}{os.environ.get('DB_NAME_USERS')}"
         # # # other directories
         # self.DIR_DB_AUXILARY = os.path.join(self.DB_LOCAL_ROOT,"auxilary")
         # self.DIR_DB_AUX_IMAGES = os.path.join(self.DIR_DB_AUXILARY,"images")
         # self.DIR_DB_AUX_BLOG = os.path.join(self.DIR_DB_AUXILARY,"blog")
         # self.DIR_DB_AUX_BLOG_POSTS = os.path.join(self.DIR_DB_AUXILARY,"blog","posts")
-        # self.LOCAL_TEST_DATA_PATH=os.environ.get('LOCAL_TEST_DATA_PATH')
+        # self.WORKSTATION_TEST_DATA_PATH=os.environ.get('WORKSTATION_TEST_DATA_PATH')
         
         # DIR_DATABASE
         self.DATABASE_ROOT = os.environ.get('DATABASE_ROOT')
         self.DIR_DB_UPLOAD = os.path.join(self.DATABASE_ROOT,"db_upload")
+        # self.SQL_URI_USERS = f"sqlite:///{self.DB_LOCAL_ROOT}{os.environ.get('DB_NAME_USERS')}"
+        self.SQL_URI_USERS = f"sqlite:///{self.DATABASE_ROOT}{os.environ.get('DB_NAME_USERS')}"
 
         # PROJECT_RESOURCES directories
         self.PROJECT_RESOURCES_ROOT = os.environ.get('PROJECT_RESOURCES_ROOT')
@@ -77,12 +78,13 @@ class ConfigBasic():
         self.VERIFY_URL_CAPTCHA = 'https://www.google.com/recaptcha/api/siteverify'
 
         self.LIST_NO_CONFIRMASTION_EMAILS = config_json_dict.get('LIST_NO_CONFIRMASTION_EMAILS')
+        self.START_STOP_LIST = config_json_dict.get('START_STOP_LIST')
 
 class ConfigWorkstation(ConfigBasic):
     
     def __init__(self):
         super().__init__()
-        # self.PROJECT_ROOT = os.environ.get('PROJECT_LOCAL_ROOT')
+        self.WORKSTATION_TEST_DATA_PATH=os.environ.get('WORKSTATION_TEST_DATA_PATH')
 
     DEBUG = True
 

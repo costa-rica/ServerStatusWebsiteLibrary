@@ -1,7 +1,7 @@
 import os
 from ss_config import ConfigDev, ConfigProd, ConfigWorkstation
 
-match os.environ.get('FSW_CONFIG_TYPE'):
+match os.environ.get('FLASK_CONFIG_TYPE'):
     case 'dev':
         config = ConfigDev()
         print('- ss_models/config: Development')
